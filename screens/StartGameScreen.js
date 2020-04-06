@@ -105,7 +105,9 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
+    justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 60,
   },
   title: {
     fontSize: 20,
