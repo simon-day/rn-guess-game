@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import Card from '../components/Card';
+import MainButton from '../components/MainButton';
 import DefaultStyles from '../constants/default-styles';
 import Colors from '../constants/colors';
 
@@ -31,7 +32,7 @@ const GameOverScreen = (props) => {
         </Text>
 
         <View style={styles.button}>
-          <Button onPress={onRestart} title="Play Again" />
+          <MainButton onPress={onRestart}>PLAY AGAIN</MainButton>
         </View>
       </Card>
     </View>
