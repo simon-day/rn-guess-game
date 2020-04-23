@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Image,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import Card from '../components/Card';
 import MainButton from '../components/MainButton';
 import DefaultStyles from '../constants/default-styles';
@@ -9,33 +17,37 @@ const GameOverScreen = (props) => {
   const { guessRounds, userNumber, onRestart } = props;
 
   return (
-    <View style={styles.screen}>
-      <Text style={DefaultStyles.title}>The game is over!</Text>
-      <View style={styles.imageContainer}>
-        <Image
-          fadeDuration={700}
-          style={styles.image}
-          resizeMode="cover"
-          // source={require('../assets/success.png')}
-          source={{
-            uri:
-              'https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg',
-          }}
-        />
-      </View>
-
-      <Card style={styles.cardContainer}>
-        <Text style={{ ...DefaultStyles.bodyText, ...styles.bodyText }}>
-          Your phone needed <Text style={styles.highlight}>{guessRounds}</Text>{' '}
-          rounds to guess the number{' '}
-          <Text style={styles.highlight}>{userNumber}</Text>
+    <ScrollView>
+      <View style={styles.screen}>
+        <Text style={{ ...DefaultStyles.title, ...styles.title }}>
+          The game is over!
         </Text>
-
-        <View style={styles.button}>
-          <MainButton onPress={onRestart}>PLAY AGAIN</MainButton>
+        <View style={styles.imageContainer}>
+          <Image
+            fadeDuration={700}
+            style={styles.image}
+            resizeMode="cover"
+            // source={require('../assets/success.png')}
+            source={{
+              uri:
+                'https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg',
+            }}
+          />
         </View>
-      </Card>
-    </View>
+
+        <Card style={styles.cardContainer}>
+          <Text style={{ ...DefaultStyles.bodyText, ...styles.bodyText }}>
+            Your phone needed{' '}
+            <Text style={styles.highlight}>{guessRounds}</Text> rounds to guess
+            the number <Text style={styles.highlight}>{userNumber}</Text>
+          </Text>
+
+          <View style={styles.button}>
+            <MainButton onPress={onRestart}>PLAY AGAIN</MainButton>
+          </View>
+        </Card>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -45,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
+    paddingVertical: 10,
   },
   image: {
     width: '100%',
@@ -52,25 +65,24 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: Dimensions.get('window').width < 400 ? 16 : 20,
   },
   imageContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: (Dimensions.get('window').width * 0.7) / 2,
     borderWidth: 3,
     borderColor: 'black',
     overflow: 'hidden',
-    marginVertical: 20,
+    marginVertical: Dimensions.get('screen').height / 30,
   },
   cardContainer: {
-    margin: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginHorizontal: 30,
+    marginVertical: Dimensions.get('window').height / 100,
   },
   button: {
     paddingTop: 15,
+    alignItems: 'center',
   },
   highlight: {
     color: Colors.primary,
